@@ -16,20 +16,22 @@ class Calculator {
     displayNumbers(){
         //event.target is a property of the event object that refers to the element that triggered the event.(in our case, it's the button that was clicked)
         const clickedButtonValue = event.target.textContent;
-        //input elements need a "value" property that allows us to get/set the input field.
-        
-        if(clickedButtonValue === "=" && this.lastOperation === "+"){
-            return this.sum()
-        } else if (clickedButtonValue === "=" && this.lastOperation === "-"){
-            return this.substract()
-        } else if (clickedButtonValue === "=" && this.lastOperation === "X"){
-            return this.multiply()
-        } else if (clickedButtonValue === "=" && this.lastOperation === "/"){
-            return this.divide()
+        const inputField = document.querySelector('.input');
+
+        if(clickedButtonValue === "="){
+            if(this.lastOperation === "+"){
+                return this.sum();
+            } else if (this.lastOperation === "-"){
+                return this.substract();
+            } else if (this.lastOperation === "X"){
+                return this.multiply();
+            } else if (this.lastOperation === "/"){
+                return this.divide();
+            } else {
+                return;
+            }
         }
         this.currentNumber += clickedButtonValue;
-        //append the new input to the current input.
-        const inputField = document.querySelector('.input');
         // if the input element is 0 we replace it to the clicked button's value. if it is not, we append the clicked button value to the current value.
         inputField.value = inputField.value === "0" ? clickedButtonValue : inputField.value + clickedButtonValue;
         if(clickedButtonValue === "+" || clickedButtonValue === "-" || clickedButtonValue === "X" || clickedButtonValue === "/"){
