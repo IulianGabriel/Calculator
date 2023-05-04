@@ -2,11 +2,11 @@
 class Calculator {
     currentNumber = 0
     constructor(){
-
+    this.lastOperation = null;
     this.buttonsFunctionality()
     }
     buttonsFunctionality(){
-         //querySelectorAll returns a NodeList, which is a collection of elements that doesn't have a "addEventListener" method
+    //querySelectorAll returns a NodeList, which is a collection of elements that doesn't have a "addEventListener" method
          let buttons = document.querySelectorAll('.buttons');
          //And because of that we loop through the NodeList and attach the event listener to each button individually.
          buttons.forEach((button) =>{
@@ -14,20 +14,80 @@ class Calculator {
         })
     }
     displayNumbers(){
-    //event.target is a property of the event object that refers to the element that triggered the event.(in our case, it's the button that was clicked)
-    const clickedButtonValue = event.target.textContent;
-    //input elements need a "value" property that allows us to get/set the input field.
-    
-    if(clickedButtonValue === "="){
-        return;
-    }
-        //append the new input to the current input.
+        //event.target is a property of the event object that refers to the element that triggered the event.(in our case, it's the button that was clicked)
+        const clickedButtonValue = event.target.textContent;
+        //input elements need a "value" property that allows us to get/set the input field.
+        
+        if(clickedButtonValue === "=" && this.lastOperation === "+"){
+            return this.sum()
+        } else if (clickedButtonValue === "=" && this.lastOperation === "-"){
+            return this.substract()
+        } else if (clickedButtonValue === "=" && this.lastOperation === "X"){
+            return this.multiply()
+        } else if (clickedButtonValue === "=" && this.lastOperation === "/"){
+            return this.divide()
+        }
         this.currentNumber += clickedButtonValue;
+        //append the new input to the current input.
         const inputField = document.querySelector('.input');
         // if the input element is 0 we replace it to the clicked button's value. if it is not, we append the clicked button value to the current value.
         inputField.value = inputField.value === "0" ? clickedButtonValue : inputField.value + clickedButtonValue;
+        if(clickedButtonValue === "+" || clickedButtonValue === "-" || clickedButtonValue === "X" || clickedButtonValue === "/"){
+            this.lastOperation = clickedButtonValue
+        }
     }
-
+    sum(){
+        const inputField = document.querySelector('.input');
+        const numbers = inputField.value.split("+");
+        let result = 0;
+        for(let i = 0; i < numbers.length; i++){
+            const num = parseFloat(numbers[i])
+            if(!isNaN(num)){
+                result += num;
+            }
+        }
+        inputField.value = result;
+        this.currentNumber = result;
+    }
+    substract(){
+        const inputField = document.querySelector('.input');
+        const numbers = inputField.value.split('-');
+        let result = numbers[0];
+        for(let i = 1; i < numbers.length; i++){
+            const num = parseFloat(numbers[i])
+            if(!isNaN(num)){
+                result -= num
+            }
+        }
+        inputField.value = result;
+        this.currentNumber = result;
+    }
+    multiply(){
+        const inputField = document.querySelector('.input');
+        const numbers = inputField.value.split('X');
+        let result = 1
+        for(let i = 0; i < numbers.length; i++){
+            const num = parseFloat(numbers[i])
+            if(!isNaN(num)){
+                result *= num
+            }
+        }
+        inputField.value = result;
+        this.currentNumber = result;
+    }
+    divide(){
+        const inputField = document.querySelector('.input');
+        const numbers = inputField.value.split('/');
+        let result = numbers[0]
+        for(let i = 1; i < numbers.length; i++){
+            const num = parseFloat(numbers[i])
+            if(!isNaN(num)){
+                result /= num
+            }
+        }
+        inputField.value = result;
+        this.currentNumber = result;
+    }
 }
 
 const myCalculator = new Calculator();
