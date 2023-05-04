@@ -60,6 +60,9 @@ class Calculator {
                 result += num;
             }
         }
+        if (result % 1 !== 0 && result.toString().split('.')[1].length > 4) {
+            result = result.toFixed(4);
+          }
         inputField.value = result;
         this.currentNumber = result;
     }
@@ -73,6 +76,9 @@ class Calculator {
                 result -= num
             }
         }
+        if (result % 1 !== 0 && result.toString().split('.')[1].length > 4) {
+            result = result.toFixed(4);
+          }
         inputField.value = result;
         this.currentNumber = result;
     }
@@ -86,6 +92,9 @@ class Calculator {
                 result *= num
             }
         }
+        if (result % 1 !== 0 && result.toString().split('.')[1].length > 4) {
+            result = result.toFixed(4);
+          }
         inputField.value = result;
         this.currentNumber = result;
     }
@@ -99,6 +108,9 @@ class Calculator {
                 result /= num
             }
         }
+        if (result % 1 !== 0 && result.toString().split('.')[1].length > 4) {
+            result = result.toFixed(4);
+          }
         inputField.value = result;
         this.currentNumber = result;
     }
