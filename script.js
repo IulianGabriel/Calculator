@@ -1,9 +1,9 @@
 
 class Calculator {
+    currentNumber = 0
     constructor(){
-        this.currentNumber = 0
 
-       
+    this.buttonsFunctionality()
     }
     buttonsFunctionality(){
          //querySelectorAll returns a NodeList, which is a collection of elements that doesn't have a "addEventListener" method
@@ -31,4 +31,3 @@ class Calculator {
 }
 
 const myCalculator = new Calculator();
-myCalculator.buttonsFunctionality();
