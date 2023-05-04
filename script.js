@@ -17,7 +17,6 @@ class Calculator {
         //event.target is a property of the event object that refers to the element that triggered the event.(in our case, it's the button that was clicked)
         const clickedButtonValue = event.target.textContent;
         const inputField = document.querySelector('.input');
-
         if(clickedButtonValue === "="){
             if(this.lastOperation === "+"){
                 return this.sum();
@@ -31,13 +30,23 @@ class Calculator {
                 return;
             }
         }
+
+        const lastChar = inputField.value[inputField.value.length - 1];
+        if ("+-X/.".includes(clickedButtonValue) && "+-X/.".includes(lastChar)) {
+          return;
+        }
+
         this.currentNumber += clickedButtonValue;
         // if the input element is 0 we replace it to the clicked button's value. if it is not, we append the clicked button value to the current value.
-        inputField.value = inputField.value === "0" ? clickedButtonValue : inputField.value + clickedButtonValue;
+        inputField.value = inputField.value === '00' ? clickedButtonValue : inputField.value + clickedButtonValue;
         if(clickedButtonValue === "+" || clickedButtonValue === "-" || clickedButtonValue === "X" || clickedButtonValue === "/"){
             this.lastOperation = clickedButtonValue
         }
-    }
+        if ("+-X/".includes(clickedButtonValue)) {
+            this.lastOperation = clickedButtonValue;
+          }
+        }
+
     sum(){
         const inputField = document.querySelector('.input');
         const numbers = inputField.value.split("+");
