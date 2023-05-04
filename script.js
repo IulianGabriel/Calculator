@@ -30,10 +30,13 @@ class Calculator {
                 return;
             }
         }
-
-        const lastChar = inputField.value[inputField.value.length - 1];
+        let lastChar = inputField.value[inputField.value.length - 1];
         if ("+-X/.".includes(clickedButtonValue) && "+-X/.".includes(lastChar)) {
           return;
+        } 
+
+        if(inputField.value === "" && clickedButtonValue === "/" || inputField.value === "" && clickedButtonValue === "X" || inputField.value === "" && clickedButtonValue === "."){
+            return;
         }
 
         this.currentNumber += clickedButtonValue;
