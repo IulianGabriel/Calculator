@@ -17,6 +17,8 @@ class Calculator {
         //event.target is a property of the event object that refers to the element that triggered the event.(in our case, it's the button that was clicked)
         const clickedButtonValue = event.target.textContent;
         const inputField = document.querySelector('.input');
+        let lastChar = inputField.value[inputField.value.length - 1];
+
         if(clickedButtonValue === "="){
             if(this.lastOperation === "+"){
                 return this.sum();
@@ -30,10 +32,12 @@ class Calculator {
                 return;
             }
         }
-        let lastChar = inputField.value[inputField.value.length - 1];
-        if ("+-X/.".includes(clickedButtonValue) && "+-X/.".includes(lastChar)) {
+        if(lastChar === "X" && clickedButtonValue === "-"){
+        lastChar = clickedButtonValue
+        } else if ("+-X/.".includes(clickedButtonValue) && "+-X/.".includes(lastChar)) {
           return;
-        } 
+        }
+
         if(inputField.value === "" && clickedButtonValue === "/" || inputField.value === "" && clickedButtonValue === "X" || inputField.value === "" && clickedButtonValue === "."){
             return;
         }
@@ -42,6 +46,7 @@ class Calculator {
         if(clickedButtonValue === "+" || clickedButtonValue === "-" || clickedButtonValue === "X" || clickedButtonValue === "/"){
             this.lastOperation = clickedButtonValue
         }
+
         if ("+-X/".includes(clickedButtonValue)) {
             this.lastOperation = clickedButtonValue;
           }
