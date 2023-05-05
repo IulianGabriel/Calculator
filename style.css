@@ -66,4 +66,10 @@ body{
     caret-color: transparent;
     color: #222;
     background-color: #eee;
+    margin-top: 3rem;
+}
+
+.clear-button{
+grid-column: 1/5;
+margin: auto;
 }
