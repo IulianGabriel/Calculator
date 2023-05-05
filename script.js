@@ -34,13 +34,10 @@ class Calculator {
         if ("+-X/.".includes(clickedButtonValue) && "+-X/.".includes(lastChar)) {
           return;
         } 
-
         if(inputField.value === "" && clickedButtonValue === "/" || inputField.value === "" && clickedButtonValue === "X" || inputField.value === "" && clickedButtonValue === "."){
             return;
         }
-
         this.currentNumber += clickedButtonValue;
-        // if the input element is 0 we replace it to the clicked button's value. if it is not, we append the clicked button value to the current value.
         inputField.value = inputField.value === '00' ? clickedButtonValue : inputField.value + clickedButtonValue;
         if(clickedButtonValue === "+" || clickedButtonValue === "-" || clickedButtonValue === "X" || clickedButtonValue === "/"){
             this.lastOperation = clickedButtonValue
@@ -49,7 +46,6 @@ class Calculator {
             this.lastOperation = clickedButtonValue;
           }
         }
-
     sum(){
         const inputField = document.querySelector('.input');
         const numbers = inputField.value.split("+");
@@ -108,12 +104,14 @@ class Calculator {
                 result /= num
             }
         }
-        if (result % 1 !== 0 && result.toString().split('.')[1].length > 4) {
+        if(result / 0){
+            inputField.value = "Infinity"
+        }
+        if (result % 1 !== 0 && result.toString().split('.')[0].length > 4) {
             result = result.toFixed(4);
           }
         inputField.value = result;
         this.currentNumber = result;
     }
 }
-
 const myCalculator = new Calculator();
