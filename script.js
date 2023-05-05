@@ -20,6 +20,7 @@ class Calculator {
         const inputField = document.querySelector('.input');
         let lastChar = inputField.value[inputField.value.length - 1];
         let findX = inputField.value.includes("X")
+        
         if(clickedButtonValue === "="){
             if(this.lastOperation === "-" && findX){
                 return this.multiply();
@@ -40,13 +41,11 @@ class Calculator {
             this.lastOperation = null;
             return;
         }
-
         if(lastChar === "X" && clickedButtonValue === "-"){
         lastChar = clickedButtonValue
         } else if ("+-X/.".includes(clickedButtonValue) && "+-X/.".includes(lastChar)) {
           return;
         }
-
         if(inputField.value === "" && clickedButtonValue === "/" || inputField.value === "" && clickedButtonValue === "X" || inputField.value === "" && clickedButtonValue === "."){
             return;
         }
@@ -55,7 +54,6 @@ class Calculator {
         if(clickedButtonValue === "+" || clickedButtonValue === "-" || clickedButtonValue === "X" || clickedButtonValue === "/"){
             this.lastOperation = clickedButtonValue;
         }
-
         if ("+-X/".includes(clickedButtonValue)) {
             this.lastOperation = clickedButtonValue;
           }
