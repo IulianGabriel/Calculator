@@ -40,4 +40,4 @@ To run the project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   https://github.com/IulianGabriel/Calculator
+   git clone https://github.com/IulianGabriel/Calculator
